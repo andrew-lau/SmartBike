@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FF0000">
+    android:layout_height="fill_parent">
 
     <!--<EditText-->
         <!--android:id="@+id/email_address"-->
@@ -10,17 +9,10 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:inputType="textEmailAddress" />-->
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World Hello world"
-        android:textSize="20sp" />
-
-    <!--<ImageView-->
-        <!--android:layout_width="500dp"-->
-        <!--android:layout_height="500dp"-->
-        <!--android:src="@drawable/left" />-->
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/leftnew" />
 
 
 </RelativeLayout>

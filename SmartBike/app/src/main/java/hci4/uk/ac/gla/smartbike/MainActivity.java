@@ -61,11 +61,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
 
         // configure map
-        FragmentManager parentFragmentManager = getFragmentManager();
-        Fragment wrapper = parentFragmentManager.findFragmentById(R.id.mapwrapper);
-        FragmentManager childFragmentManager = wrapper.getChildFragmentManager();
-
-        MapFragment mapFragment = (MapFragment) childFragmentManager.findFragmentById(R.id.map22);
+        FragmentManager fragmentManager = getFragmentManager();
+        MapFragment mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.locationMap);
 
         MapsInitializer.initialize(this);
 
