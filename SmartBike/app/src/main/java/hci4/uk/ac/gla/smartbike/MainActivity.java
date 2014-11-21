@@ -12,6 +12,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -45,6 +46,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private Sensor accelerometer;
     private Sensor magneticField;
     private LatLng location;
+    private DirectionsReader directionsReader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +90,11 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         magneticField = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
+        // get directions reader
+        directionsReader = new DirectionsReader();
+
         // draw route
-        List<LatLng> points = new DirectionsReader().getPoints();
+        List<LatLng> points = directionsReader.getPoints();
         PolylineOptions lineOptions = new PolylineOptions();
         for(LatLng point : points) {
             lineOptions.add(point);
@@ -152,6 +157,15 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     public void onLocationChanged(Location loc) {
         if (loc != null){
             location = new LatLng(loc.getLatitude(), loc.getLongitude());
+
+            Instruction instruction = directionsReader.getNextInstruction(location);
+            FragmentManager fragmentManager = getFragmentManager();
+            TextView debug = (TextView) findViewById(R.id.debug);
+            if(instruction != null)
+                debug.setText(instruction.toString());
+            else
+                debug.setText("Reached destination!!!!!!!!!");
+
             updateCamera();
             marker.setPosition(location);
         }
