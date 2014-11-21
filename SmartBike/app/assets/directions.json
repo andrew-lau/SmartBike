@@ -1,0 +1,269 @@
+
+
+    {
+       "routes":
+       [
+           {
+               "bounds":
+               {
+                   "northeast":
+                   {
+                       "lat": 55.8754252,
+                       "lng": -4.2855826
+                   },
+                   "southwest":
+                   {
+                       "lat": 55.87347579999999,
+                       "lng": -4.2925919
+                   }
+               },
+               "copyrights": "Map data ©2014 Google",
+               "legs":
+               [
+                   {
+                       "distance":
+                       {
+                           "text": "1.0 km",
+                           "value": 953
+                       },
+                       "duration":
+                       {
+                           "text": "3 mins",
+                           "value": 161
+                       },
+                       "end_address": "University of Glasgow, 64 Hillhead Street, Glasgow, Glasgow, Glasgow City G12, UK",
+                       "end_location":
+                       {
+                           "lat": 55.873669,
+                           "lng": -4.2881525
+                       },
+                       "start_address": "University of Glasgow, 17 Lilybank Gardens, Glasgow, Glasgow, Glasgow City G12 8RZ, UK",
+                       "start_location":
+                       {
+                           "lat": 55.8739731,
+                           "lng": -4.2923257
+                       },
+                       "steps":
+                       [
+                           {
+                               "distance":
+                               {
+                                   "text": "0.2 km",
+                                   "value": 172
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 18
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.8753334,
+                                   "lng": -4.2916229
+                               },
+                               "html_instructions": "Head northwest on Lilybank Gardens toward Great George St",
+                               "polyline":
+                               {
+                                   "points": "i{_tI`jeYCFKREFEBGDGBE@C?C?E?CACCGEGEEECCo@s@WYeBwA"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.8739731,
+                                   "lng": -4.2923257
+                               },
+                               "travel_mode": "DRIVING"
+                           },
+                           {
+                               "distance":
+                               {
+                                   "text": "0.3 km",
+                                   "value": 271
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 53
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.8743681,
+                                   "lng": -4.2876372
+                               },
+                               "html_instructions": "Turn right onto Great George St",
+                               "maneuver": "turn-right",
+                               "polyline":
+                               {
+                                   "points": "yc`tIreeYFc@D]V_B@KZoB?C@C@A?A@C?ABKT}AF]TeB\yB^cC"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.8753334,
+                                   "lng": -4.2916229
+                               },
+                               "travel_mode": "DRIVING"
+                           },
+                           {
+                               "distance":
+                               {
+                                   "text": "0.1 km",
+                                   "value": 127
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 19
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.8754252,
+                                   "lng": -4.2868593
+                               },
+                               "html_instructions": "Turn left onto Hillhead St",
+                               "maneuver": "turn-left",
+                               "polyline":
+                               {
+                                   "points": "y}_tIvldYsE{C"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.8743681,
+                                   "lng": -4.2876372
+                               },
+                               "travel_mode": "DRIVING"
+                           },
+                           {
+                               "distance":
+                               {
+                                   "text": "86 m",
+                                   "value": 86
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 16
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.8751265,
+                                   "lng": -4.2855826
+                               },
+                               "html_instructions": "Take the 1st right onto Glasgow St",
+                               "polyline":
+                               {
+                                   "points": "md`tIzgdYZuBBMT}AD]"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.8754252,
+                                   "lng": -4.2868593
+                               },
+                               "travel_mode": "DRIVING"
+                           },
+                           {
+                               "distance":
+                               {
+                                   "text": "0.2 km",
+                                   "value": 198
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 31
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.87347579999999,
+                                   "lng": -4.2867936
+                               },
+                               "html_instructions": "Take the 2nd right onto Southpark Ave",
+                               "polyline":
+                               {
+                                   "points": "qb`tIz_dYrEzCPJbBhA"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.8751265,
+                                   "lng": -4.2855826
+                               },
+                               "travel_mode": "DRIVING"
+                           },
+                           {
+                               "distance":
+                               {
+                                   "text": "87 m",
+                                   "value": 87
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 20
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.8737685,
+                                   "lng": -4.2880804
+                               },
+                               "html_instructions": "Turn right onto Gibson St",
+                               "maneuver": "turn-right",
+                               "polyline":
+                               {
+                                   "points": "gx_tIlgdYy@`G"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.87347579999999,
+                                   "lng": -4.2867936
+                               },
+                               "travel_mode": "DRIVING"
+                           },
+                           {
+                               "distance":
+                               {
+                                   "text": "12 m",
+                                   "value": 12
+                               },
+                               "duration":
+                               {
+                                   "text": "1 min",
+                                   "value": 4
+                               },
+                               "end_location":
+                               {
+                                   "lat": 55.873669,
+                                   "lng": -4.2881525
+                               },
+                               "html_instructions": "Turn left onto Hillhead St",
+                               "maneuver": "turn-left",
+                               "polyline":
+                               {
+                                   "points": "az_tInodYRL"
+                               },
+                               "start_location":
+                               {
+                                   "lat": 55.8737685,
+                                   "lng": -4.2880804
+                               },
+                               "travel_mode": "DRIVING"
+                           }
+                       ],
+                       "via_waypoint":
+                       [
+                       ]
+                   }
+               ],
+               "overview_polyline":
+               {
+                   "points": "i{_tI`jeYOZKJYJQEYUgAmAeBwAFc@\}B\{BBKZoBzAaKsE{CZuBXkBD]rEzCtBtAy@`GRL"
+               },
+               "summary": "Great George St",
+               "warnings":
+               [
+               ],
+               "waypoint_order":
+               [
+               ]
+           }
+       ],
+       "status": "OK"
+    }
+

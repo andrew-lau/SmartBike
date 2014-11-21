@@ -1,24 +1,24 @@
 package hci4.uk.ac.gla.smartbike;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -27,22 +27,24 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-import org.apache.commons.logging.Log;
-
+import java.util.List;
 
 public class MainActivity extends Activity implements GooglePlayServicesClient.ConnectionCallbacks,
         GooglePlayServicesClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener,
+        SensorEventListener {
 
     private LocationClient locationClient;
     private LocationRequest locationRequest;
     private GoogleMap googleMap;
     private Marker marker;
-
-
+    private int bearing; // value in radians
+    private SensorManager mSensorManager;
+    private Sensor accelerometer;
+    private Sensor magneticField;
+    private LatLng location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +76,38 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             System.out.println("yo");
         }
 
-
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(55.8554602,-4.2324586))
-                .zoom(19)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
-                .tilt(70)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        location = new LatLng(55.8554602, -4.2324586);
+        bearing = 90;
+        updateCamera();
         googleMap.setBuildingsEnabled(true);
 
-        marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(55.8554602,-4.2324586)));
+        marker = googleMap.addMarker(new MarkerOptions().position(location));
 
+        // configure sensor
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magneticField = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 
+        // draw route
+        List<LatLng> points = new DirectionsReader().getPoints();
+        PolylineOptions lineOptions = new PolylineOptions();
+        for(LatLng point : points) {
+            lineOptions.add(point);
+        }
+        googleMap.addPolyline(lineOptions);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, magneticField, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSensorManager.unregisterListener(this);
     }
 
     @Override
@@ -128,15 +149,55 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-        if (location != null){
-            googleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
-            marker.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
+    public void onLocationChanged(Location loc) {
+        if (loc != null){
+            location = new LatLng(loc.getLatitude(), loc.getLongitude());
+            updateCamera();
+            marker.setPosition(location);
         }
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
+
+    float[] mGravity;
+    float[] mGeomagnetic;
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            mGravity = event.values;
+        }
+        if (event.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
+            mGeomagnetic = event.values;
+        }
+        if (mGravity != null && mGeomagnetic != null) {
+            float R[] = new float[9];
+            float I[] = new float[9];
+            boolean success = SensorManager.getRotationMatrix(R, I, mGravity, mGeomagnetic);
+            if (success) {
+                float orientation[] = new float[3];
+                SensorManager.getOrientation(R, orientation);
+                bearing = (int) Math.round(Math.toDegrees(orientation[0]));
+                //updateCamera();
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        // not needed
+    }
+
+    private void updateCamera() {
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(location)
+                .zoom(19)                   // Sets the zoom
+                .bearing(bearing)           // Sets the orientation of the camera to east
+                .tilt(70)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
