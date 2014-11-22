@@ -72,8 +72,6 @@ public class DirectionsReader {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        System.out.println("Initial upcoming steps: " + upcomingSteps);
     }
 
     private JSONObject loadJSONFromAsset() {
@@ -137,7 +135,7 @@ public class DirectionsReader {
             return null;
         }
 
-        currentStep = upcomingSteps.remove();
+        currentStep = upcomingSteps.peek();
         Proximity proximity = getProximityTo(currentStep);
         Instruction instruction = new Instruction(proximity, currentStep.getManeuver());
 
@@ -148,7 +146,6 @@ public class DirectionsReader {
     private void discardPastInstructions() {
         for(Step step : upcomingSteps) {
             if(!isCurrentStep(step)) {
-                System.out.println("Discarding step " + step);
                 upcomingSteps.remove();
             }
         }
@@ -156,17 +153,24 @@ public class DirectionsReader {
 
     private Proximity getProximityTo(Step step) {
         double distance = distanceBetween(currentLocation, currentStep.getEnd());
+        System.out.println("*************** " + distance);
         if(distance > 105) {
+            System.out.println("*************** FAR");
             return Proximity.FAR;
-        }else if(distance <= 105 && distance >= 95) {
+        }else if(distance <= 105 && distance > 55) {
+            System.out.println("*************** SEMI_FAR");
             return Proximity.SEMI_FAR;
-        } else if(distance <= 55 && distance >= 45) {
+        } else if(distance <= 55 && distance > 45) {
+            System.out.println("*************** MEH");
             return Proximity.MEH;
-        } else if(distance <= 30 && distance >= 20) {
+        } else if(distance <= 45 && distance > 20) {
+            System.out.println("*************** CLOSE");
             return Proximity.CLOSE;
-        } else if(distance <= 15 && distance >= 5) {
+        } else if(distance <= 20 && distance > 5) {
+            System.out.println("*************** SUPER_CLOSE");
             return Proximity.SUPER_CLOSE;
         } else {
+            System.out.println("*************** NOW");
             return Proximity.NOW;
         }
     }

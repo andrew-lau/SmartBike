@@ -194,7 +194,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             if (success) {
                 float orientation[] = new float[3];
                 SensorManager.getOrientation(R, orientation);
-                bearing = (int) Math.round(Math.toDegrees(orientation[0]));
+                bearing = 90 + (int) Math.round(Math.toDegrees(orientation[0]));
                 //updateCamera();
             }
         }
