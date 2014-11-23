@@ -160,6 +160,8 @@ public class DirectionsReader {
         currentStep = upcomingSteps.peek();
         Proximity proximity = getProximityTo(currentStep);
 
+        // 
+
         // create a new Instruction that will be displayed to the user
         Instruction instruction = new Instruction(proximity, currentStep.getManeuver());
 
