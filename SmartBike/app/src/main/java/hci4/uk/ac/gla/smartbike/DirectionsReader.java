@@ -150,7 +150,7 @@ public class DirectionsReader {
         // remove steps from the queue which are no longer relevant
         discardPastInstructions();
 
-        // upcomingStemps is empty - means that there are no more steps to follow
+        // upcomingSteps is empty - means that there are no more steps to follow
         // i.e. user has reached destination
         if(upcomingSteps.isEmpty()) {
             return null;
@@ -207,13 +207,48 @@ public class DirectionsReader {
     /* determines if given Step is the step that the user is currently following.
      *  this is determined based on the value of the user's currentLocation and previousLocation */
     private boolean isCurrentStep(Step step) {
-        if(distanceBetween(currentLocation, previousLocation) <= 10) {
+        Step nextStep = getNextStep();
+
+        // if distance is smaller than two meters - we've not moved
+        if(distanceBetween(currentLocation, previousLocation) <= 2) {
             return true;
         }
+
+        // getting closer to current step
         if(distanceBetween(currentLocation, step.getEnd()) < distanceBetween(previousLocation, step.getEnd())) {
             return true;
         }
+
+        // no next step and we're within 2m of goal
+        if(nextStep == null && distanceBetween(currentLocation, step.getEnd()) <= 2) {
+            return false;
+        }
+
+        // getting further away from current step
+        // AND
+        // getting further away from next step
+        if(distanceBetween(currentLocation, step.getEnd()) > distanceBetween(previousLocation, step.getEnd()) &&
+           distanceBetween(currentLocation, nextStep.getEnd()) > distanceBetween(previousLocation, nextStep.getEnd())) {
+            return true;
+        }
+
+        // getting further away from current step
+        // AND
+        // getting closer to next step
+        if(distanceBetween(currentLocation, step.getEnd()) > distanceBetween(previousLocation, step.getEnd()) &&
+            distanceBetween(currentLocation, nextStep.getEnd()) < distanceBetween(previousLocation, nextStep.getEnd())) {
+            return false;
+        }
+
         return false;
+    }
+
+    private Step getNextStep() {
+        Object[] steps = upcomingSteps.toArray();
+        if(steps.length < 2)
+            return null;
+
+        return (Step) steps[1];
     }
 
     /* returns the distance (in meters) between two points */
