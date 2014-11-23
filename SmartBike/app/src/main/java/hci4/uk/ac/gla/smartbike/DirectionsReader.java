@@ -22,10 +22,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class DirectionsReader {
 
+    /* a queue of upcoming steps. first element in the queue should always be the current step */
     private Queue<Step> upcomingSteps;
 
+    /* user's previous location */
     private LatLng previousLocation;
+
+    /* user's current location */
     private LatLng currentLocation;
+
+    /* the step the user is currently following */
     private Step currentStep;
 
     public DirectionsReader() {
@@ -33,7 +39,11 @@ public class DirectionsReader {
         previousLocation = null;
         currentLocation = null;
 
+        // load json file containing directions
         JSONObject directionsJson = loadJSONFromAsset();
+
+        // rest of the method just parses JSON directions
+        // and adds to the upcomingSteps queue, only if a step has a maneuver
         try {
             JSONArray routes = directionsJson.getJSONArray("routes");
             JSONObject route = routes.getJSONObject(0);
@@ -74,6 +84,7 @@ public class DirectionsReader {
         }
     }
 
+    /* loads JSON from a file stored on the device */
     private JSONObject loadJSONFromAsset() {
         String json = null;
         try {
@@ -98,6 +109,7 @@ public class DirectionsReader {
         }
     }
 
+    /* returns a list of points that define the polyline of the entire route */
     public List<LatLng> getPoints() {
         ArrayList<LatLng> points = new ArrayList<LatLng>();
 
@@ -124,21 +136,34 @@ public class DirectionsReader {
         return points;
     }
 
+    /* return the next instruction that the user should follow */
     public synchronized Instruction getNextInstruction(LatLng currentLocation) {
+        // update current location
         this.currentLocation = currentLocation;
+
+        // if previousLocation is null - journey has just began
+        // set previousLocation equal to currentLocation
         if(previousLocation == null) {
             previousLocation = currentLocation;
         }
 
+        // remove steps from the queue which are no longer relevant
         discardPastInstructions();
+
+        // upcomingStemps is empty - means that there are no more steps to follow
+        // i.e. user has reached destination
         if(upcomingSteps.isEmpty()) {
             return null;
         }
 
+        // generate a proximity to the end of the currentStep
         currentStep = upcomingSteps.peek();
         Proximity proximity = getProximityTo(currentStep);
+
+        // create a new Instruction that will be displayed to the user
         Instruction instruction = new Instruction(proximity, currentStep.getManeuver());
 
+        // update previousLocation to equal currentLocation
         this.previousLocation = currentLocation;
         return instruction;
     }
@@ -151,6 +176,7 @@ public class DirectionsReader {
         }
     }
 
+    /* returns the proximity of the currentLoation to the end goal for the currentStep */
     private Proximity getProximityTo(Step step) {
         double distance = distanceBetween(currentLocation, currentStep.getEnd());
         System.out.println("*************** " + distance);
@@ -175,6 +201,8 @@ public class DirectionsReader {
         }
     }
 
+    /* determines if given Step is the step that the user is currently following.
+     *  this is determined based on the value of the user's currentLocation and previousLocation */
     private boolean isCurrentStep(Step step) {
         if(distanceBetween(currentLocation, previousLocation) <= 10) {
             return true;
@@ -185,6 +213,7 @@ public class DirectionsReader {
         return false;
     }
 
+    /* returns the distance (in meters) between two points */
     private double distanceBetween(LatLng start, LatLng end) {
         float[] results = new float[1];
         Location.distanceBetween(start.latitude, start.longitude, end.latitude, end.longitude, results);

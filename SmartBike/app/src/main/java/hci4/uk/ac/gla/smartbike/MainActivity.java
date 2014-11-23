@@ -74,9 +74,6 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         MapsInitializer.initialize(this);
 
         googleMap = mapFragment.getMap();
-        if (googleMap == null){
-            System.out.println("yo");
-        }
 
         location = new LatLng(55.8554602, -4.2324586);
         bearing = 90;
