@@ -26,6 +26,8 @@ public class Sounds {
         left50m = MediaPlayer.create(context, R.raw.left_50m);
         reachedDestination = MediaPlayer.create(context, R.raw.reached_destination);
 
+        beepLeft.setLooping(true);
+
         hasReachedDestination = false;
         isWithin50m = false;
         isWithin10m = false;
@@ -34,6 +36,10 @@ public class Sounds {
 
     public void playBeepLeft() {
         beepLeft.start();
+    }
+
+    public void pauseBeepLeft() {
+        beepLeft.pause();
     }
 
     public void playLeft5m() {

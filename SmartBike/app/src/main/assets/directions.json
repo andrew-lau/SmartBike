@@ -1,182 +1,74 @@
 {
-       "routes":
-       [
-           {
-               "bounds":
-               {
-                   "northeast":
-                   {
-                       "lat": 55.8738445,
-                       "lng": -4.2881525
-                   },
-                   "southwest":
-                   {
-                       "lat": 55.87245429999999,
-                       "lng": -4.2921714
-                   }
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 55.8738609,
+               "lng" : -4.2921187
+            },
+            "southwest" : {
+               "lat" : 55.8738055,
+               "lng" : -4.2921936
+            }
+         },
+         "copyrights" : "Map data ©2014 Google",
+         "legs" : [
+            {
+               "distance" : {
+                  "text" : "8 m",
+                  "value" : 8
                },
-               "copyrights": "Map data ©2014 Google",
-               "legs":
-               [
-                   {
-                       "distance":
-                       {
-                           "text": "0.4 km",
-                           "value": 417
-                       },
-                       "duration":
-                       {
-                           "text": "3 mins",
-                           "value": 152
-                       },
-                       "end_address": "University of Glasgow, 64 Hillhead Street, Glasgow, Glasgow, Glasgow City G12, UK",
-                       "end_location":
-                       {
-                           "lat": 55.873669,
-                           "lng": -4.2881525
-                       },
-                       "start_address": "University of Glasgow, 17 Lilybank Gardens, Glasgow, Glasgow, Glasgow City G12 8RZ, UK",
-                       "start_location":
-                       {
-                           "lat": 55.8738445,
-                           "lng": -4.2921714
-                       },
-                       "steps":
-                       [
-                           {
-                               "distance":
-                               {
-                                   "text": "49 m",
-                                   "value": 49
-                               },
-                               "duration":
-                               {
-                                   "text": "1 min",
-                                   "value": 18
-                               },
-                               "end_location":
-                               {
-                                   "lat": 55.8735059,
-                                   "lng": -4.2916766
-                               },
-                               "html_instructions": "Head southeast toward University Gardens",
-                               "polyline":
-                               {
-                                   "points": "oz_tI`ieY|@sA@C@E?C"
-                               },
-                               "start_location":
-                               {
-                                   "lat": 55.8738445,
-                                   "lng": -4.2921714
-                               },
-                               "travel_mode": "BICYCLING"
-                           },
-                           {
-                               "distance":
-                               {
-                                   "text": "0.2 km",
-                                   "value": 185
-                               },
-                               "duration":
-                               {
-                                   "text": "1 min",
-                                   "value": 58
-                               },
-                               "end_location":
-                               {
-                                   "lat": 55.8725216,
-                                   "lng": -4.2896323
-                               },
-                               "html_instructions": "Turn left onto University Gardens",
-                               "maneuver": "turn-left",
-                               "polyline":
-                               {
-                                   "points": "mx_tI~eeYAACAAAACAC?E?E?E@EDGBEt@eAx@iAFKDI@E@GBMDYF_@Fa@F[DQ@E@C@C@ARI"
-                               },
-                               "start_location":
-                               {
-                                   "lat": 55.8735059,
-                                   "lng": -4.2916766
-                               },
-                               "travel_mode": "BICYCLING"
-                           },
-                           {
-                               "distance":
-                               {
-                                   "text": "36 m",
-                                   "value": 36
-                               },
-                               "duration":
-                               {
-                                   "text": "1 min",
-                                   "value": 33
-                               },
-                               "end_location":
-                               {
-                                   "lat": 55.87245429999999,
-                                   "lng": -4.2890629
-                               },
-                               "html_instructions": "Turn left onto University Ave",
-                               "maneuver": "turn-left",
-                               "polyline":
-                               {
-                                   "points": "gr_tIdydYLqB"
-                               },
-                               "start_location":
-                               {
-                                   "lat": 55.8725216,
-                                   "lng": -4.2896323
-                               },
-                               "travel_mode": "BICYCLING"
-                           },
-                           {
-                               "distance":
-                               {
-                                   "text": "0.1 km",
-                                   "value": 147
-                               },
-                               "duration":
-                               {
-                                   "text": "1 min",
-                                   "value": 43
-                               },
-                               "end_location":
-                               {
-                                   "lat": 55.873669,
-                                   "lng": -4.2881525
-                               },
-                               "html_instructions": "Turn left onto Hillhead St",
-                               "maneuver": "turn-left",
-                               "polyline":
-                               {
-                                   "points": "yq_tIrudYa@Yc@[w@i@m@c@YOIGc@Y"
-                               },
-                               "start_location":
-                               {
-                                   "lat": 55.87245429999999,
-                                   "lng": -4.2890629
-                               },
-                               "travel_mode": "BICYCLING"
-                           }
-                       ],
-                       "via_waypoint":
-                       [
-                       ]
-                   }
-               ],
-               "overview_polyline":
-               {
-                   "points": "oz_tI`ieY~@wA@IIIAUFMx@kA`AuAFORoAVuABGTKLqBa@Y{AeAuBuA"
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 3
                },
-               "summary": "University Gardens and Hillhead St",
-               "warnings":
-               [
-                   "Bicycling directions are in beta. Use caution – This route may contain streets that aren't suited for bicycling."
+               "end_address" : "University of Glasgow, 17 Lilybank Gardens, Glasgow, Glasgow, Glasgow City G12 8RZ, UK",
+               "end_location" : {
+                  "lat" : 55.8738055,
+                  "lng" : -4.2921187
+               },
+               "start_address" : "University of Glasgow, 17 Lilybank Gardens, Glasgow, Glasgow, Glasgow City G12 8RZ, UK",
+               "start_location" : {
+                  "lat" : 55.8738609,
+                  "lng" : -4.2921936
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "8 m",
+                        "value" : 8
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 3
+                     },
+                     "end_location" : {
+                        "lat" : 55.8738055,
+                        "lng" : -4.2921187
+                     },
+                     "html_instructions" : "Head \u003cb\u003esoutheast\u003c/b\u003e toward \u003cb\u003eUniversity Gardens\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "sz_tIdieYBCDI"
+                     },
+                     "start_location" : {
+                        "lat" : 55.8738609,
+                        "lng" : -4.2921936
+                     },
+                     "travel_mode" : "BICYCLING"
+                  }
                ],
-               "waypoint_order":
-               [
-               ]
-           }
-       ],
-       "status": "OK"
-    }
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "sz_tIdieYHM"
+         },
+         "summary" : "",
+         "warnings" : [
+            "Bicycling directions are in beta. Use caution – This route may contain streets that aren't suited for bicycling."
+         ],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}

@@ -74,8 +74,15 @@ public class DirectionsReader {
                             upcomingSteps.add(new Step(maneuver, start, end));
                         }
 
+                    // step has no maneuver attribute
                     } catch(JSONException e) {
-                        //e.printStackTrace();
+                        JSONObject startLocation = step.getJSONObject("start_location");
+                        LatLng start = new LatLng(startLocation.getDouble("lat"), startLocation.getDouble("lng"));
+
+                        JSONObject endLocation = step.getJSONObject("start_location");
+                        LatLng end = new LatLng(endLocation.getDouble("lat"), endLocation.getDouble("lng"));
+
+                        upcomingSteps.add(new Step(Maneuver.NONE, start, end));
                     }
                 }
             }
@@ -209,11 +216,6 @@ public class DirectionsReader {
     private boolean isCurrentStep(Step step) {
         Step nextStep = getNextStep();
 
-        // if distance is smaller than two meters - we've not moved
-        if(distanceBetween(currentLocation, previousLocation) <= 2) {
-            return true;
-        }
-
         // getting closer to current step
         if(distanceBetween(currentLocation, step.getEnd()) < distanceBetween(previousLocation, step.getEnd())) {
             return true;
@@ -222,6 +224,11 @@ public class DirectionsReader {
         // no next step and we're within 2m of goal
         if(nextStep == null && distanceBetween(currentLocation, step.getEnd()) <= 2) {
             return false;
+        }
+
+        // no next step and we're NOT within 2m of goal
+        if(nextStep == null) {
+            return true;
         }
 
         // getting further away from current step

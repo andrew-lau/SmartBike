@@ -49,6 +49,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private Sensor accelerometer;
     private Sensor magneticField;
 
+    private boolean vibrateMode = false;
+
     /* current location of the user */
     private LatLng location;
     private DirectionsReader directionsReader;
@@ -149,6 +151,12 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_search) {
+            System.out.println("Using vibrate mode");
+            vibrateMode = !vibrateMode;
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -189,17 +197,29 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
         double distance= currentInstruction.getDistance();
 
-        if(currentInstruction.getDistance() > 55) {
-            theArrow.setImageResource(R.drawable.forward);
-        } else if(currentInstruction.getManeuver() == Maneuver.LEFT) {
-            if(distance <= 55 && distance >= 45) {
-                sounds.playLeft50m();
-            } else if(distance <= 15 && distance >= 5) {
-                sounds.playLeft10m();
-            } else if(distance <= 5) {
-                sounds.playLeft5m();
+        System.out.println(currentInstruction.getManeuver());
+
+        if(currentInstruction.getManeuver() == Maneuver.NONE) {
+            if (!vibrateMode){
+                if(distance <= 55 && distance >= 45) {
+                    sounds.playLeft50m();
+                } else if(distance <= 15 && distance >= 5) {
+                    sounds.playLeft10m();
+                } else if(distance <= 5) {
+                    sounds.playLeft5m();
+                    theArrow.setImageResource(R.drawable.leftnew);
+                }
             }
-            theArrow.setImageResource(R.drawable.leftnew);
+            else {
+                if (distance <= 15 && distance >= 5) {
+                    sounds.playBeepLeft();
+                    theArrow.setImageResource(R.drawable.leftnew);
+                } else {
+                    sounds.pauseBeepLeft();
+                }
+            }
+
+
         } else {
             theArrow.setImageResource(R.drawable.rightnew);
         }
