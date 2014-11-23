@@ -197,9 +197,13 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
         double distance= currentInstruction.getDistance();
 
-        System.out.println(currentInstruction.getManeuver());
 
-        if(currentInstruction.getManeuver() == Maneuver.NONE) {
+
+        if(currentInstruction.getDistance() > 55 || currentInstruction.getManeuver() == Maneuver.NONE) {
+            theArrow.setImageResource(R.drawable.forward);
+        } else if(currentInstruction.getManeuver() == Maneuver.LEFT) {
+            theArrow.setImageResource(R.drawable.leftnew);
+
             if (!vibrateMode){
                 if(distance <= 55 && distance >= 45) {
                     sounds.playLeft50m();
@@ -207,19 +211,15 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
                     sounds.playLeft10m();
                 } else if(distance <= 5) {
                     sounds.playLeft5m();
-                    theArrow.setImageResource(R.drawable.leftnew);
                 }
             }
             else {
                 if (distance <= 15 && distance >= 5) {
                     sounds.playBeepLeft();
-                    theArrow.setImageResource(R.drawable.leftnew);
                 } else {
                     sounds.pauseBeepLeft();
                 }
             }
-
-
         } else {
             theArrow.setImageResource(R.drawable.rightnew);
         }
