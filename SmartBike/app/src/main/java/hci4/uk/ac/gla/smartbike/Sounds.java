@@ -40,6 +40,8 @@ public class Sounds {
         if(!isWithin5m) {
             left5m.start();
             isWithin5m = true;
+            isWithin10m = false;
+            isWithin50m = false;
         }
     }
 
@@ -47,6 +49,8 @@ public class Sounds {
         if(!isWithin10m) {
             left10m.start();
             isWithin10m = true;
+            isWithin5m = false;
+            isWithin5m = false;
         }
     }
 
@@ -54,8 +58,6 @@ public class Sounds {
         if(!isWithin50m) {
             left50m.start();
             isWithin50m = true;
-        } else if(isWithin50m && isWithin10m && isWithin5m) {
-            left50m.start();
             isWithin10m = false;
             isWithin5m = false;
         }
