@@ -10,6 +10,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,7 +22,6 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MainActivity extends Activity implements GooglePlayServicesClient.ConnectionCallbacks,
@@ -54,6 +55,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     /* current Instruction user is following */
     private Instruction currentInstruction;
 
+    private Sounds sounds;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -70,7 +73,6 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         locationRequest.setInterval(0);
 
         locationClient.connect();
-
 
         // configure map
         FragmentManager fragmentManager = getFragmentManager();
@@ -104,6 +106,9 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
             lineOptions.add(point);
         }
         googleMap.addPolyline(lineOptions);
+
+        // load sounds
+        sounds = new Sounds(this);
     }
 
     @Override
@@ -121,7 +126,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
     @Override
     protected void onDestroy(){
-       locationClient.disconnect();
+        locationClient.disconnect();
         super.onDestroy();
     }
 
@@ -159,34 +164,46 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
     @Override
     public void onLocationChanged(Location loc) {
+
         if (loc != null){
             location = new LatLng(loc.getLatitude(), loc.getLongitude());
             currentInstruction = directionsReader.getNextInstruction(location);
 
-            updateDirections();
+            provideDirectionFeedback();
 
             updateCamera();
             marker.setPosition(location);
         }
     }
 
-    private void updateDirections() {
+    private void provideDirectionFeedback() {
         ImageView theArrow = (ImageView) findViewById(R.id.arrow);
         TextView theDistance = (TextView) findViewById(R.id.distance);
+
         if(currentInstruction == null) {
+            sounds.playReachedDestination();
             theArrow.setImageResource(R.drawable.done);
             theDistance.setText("");
             return;
         }
 
+        double distance= currentInstruction.getDistance();
+
         if(currentInstruction.getDistance() > 55) {
             theArrow.setImageResource(R.drawable.forward);
         } else if(currentInstruction.getManeuver() == Maneuver.LEFT) {
+            if(distance <= 55 && distance >= 45) {
+                sounds.playLeft50m();
+            } else if(distance <= 15 && distance >= 5) {
+                sounds.playLeft10m();
+            } else if(distance <= 5) {
+                sounds.playLeft5m();
+            }
             theArrow.setImageResource(R.drawable.leftnew);
         } else {
             theArrow.setImageResource(R.drawable.rightnew);
         }
-        theDistance.setText(((int)Math.round(currentInstruction.getDistance())) + "m");
+        theDistance.setText(((int)Math.round(distance)) + "m");
     }
 
     @Override
