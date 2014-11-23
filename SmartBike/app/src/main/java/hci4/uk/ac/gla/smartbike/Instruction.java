@@ -7,6 +7,11 @@ public class Instruction {
 
     private Proximity proximity;
     private Maneuver maneuver;
+    private double distance;
+
+    public double getDistance() {
+        return distance;
+    }
 
     public Instruction(Proximity proximity, Maneuver maneuver) {
         this.proximity = proximity;
