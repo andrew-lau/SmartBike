@@ -10,9 +10,14 @@
         <!--android:inputType="textEmailAddress" />-->
 
     <ImageView
+        android:id="@+id/arrow"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:src="@drawable/leftnew" />
+        android:layout_height="fill_parent"/>
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 
 </RelativeLayout>

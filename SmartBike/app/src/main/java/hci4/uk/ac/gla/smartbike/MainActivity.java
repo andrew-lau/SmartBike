@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -61,8 +63,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         locationRequest = LocationRequest.create();
 
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        locationRequest.setInterval(100);
-        locationRequest.setFastestInterval(100);
+        locationRequest.setInterval(0);
 
         locationClient.connect();
 
@@ -92,7 +93,8 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
         // draw route
         List<LatLng> points = directionsReader.getPoints();
-        PolylineOptions lineOptions = new PolylineOptions();
+        PolylineOptions lineOptions = new PolylineOptions()
+                .color(Color.CYAN);
         for(LatLng point : points) {
             lineOptions.add(point);
         }
@@ -152,14 +154,25 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
     @Override
     public void onLocationChanged(Location loc) {
+        System.out.println("I'm being called!!!!!");
         if (loc != null){
             location = new LatLng(loc.getLatitude(), loc.getLongitude());
 
             Instruction instruction = directionsReader.getNextInstruction(location);
             FragmentManager fragmentManager = getFragmentManager();
             TextView debug = (TextView) findViewById(R.id.debug);
-            if(instruction != null)
+            if(instruction != null){
+                ImageView theArrow = (ImageView) findViewById(R.id.arrow);
                 debug.setText(instruction.toString());
+                System.out.println("The instruction: " + instruction.toString());
+                if (instruction.getManeuver() == Maneuver.LEFT){
+                    theArrow.setImageResource(R.drawable.leftnew);
+                }
+                else{
+                    theArrow.setImageResource(R.drawable.rightnew);
+                }
+            }
+
             else
                 debug.setText("Reached destination!!!!!!!!!");
 
