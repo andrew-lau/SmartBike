@@ -7,12 +7,6 @@
     tools:context=".MainActivity"
     tools:ignore="MergeRootFrame">
 
-    <TextView
-        android:id="@+id/debug"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/locationMap"
         android:name="com.google.android.gms.maps.MapFragment"

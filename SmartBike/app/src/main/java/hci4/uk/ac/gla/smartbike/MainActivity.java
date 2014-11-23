@@ -47,8 +47,12 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private SensorManager mSensorManager;
     private Sensor accelerometer;
     private Sensor magneticField;
+
+    /* current location of the user */
     private LatLng location;
     private DirectionsReader directionsReader;
+    /* current Instruction user is following */
+    private Instruction currentInstruction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,7 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
         bearing = 90;
         updateCamera();
         googleMap.setBuildingsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(false);
 
         marker = googleMap.addMarker(new MarkerOptions().position(location));
 
@@ -154,31 +159,34 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
     @Override
     public void onLocationChanged(Location loc) {
-        System.out.println("I'm being called!!!!!");
         if (loc != null){
             location = new LatLng(loc.getLatitude(), loc.getLongitude());
+            currentInstruction = directionsReader.getNextInstruction(location);
 
-            Instruction instruction = directionsReader.getNextInstruction(location);
-            FragmentManager fragmentManager = getFragmentManager();
-            TextView debug = (TextView) findViewById(R.id.debug);
-            if(instruction != null){
-                ImageView theArrow = (ImageView) findViewById(R.id.arrow);
-                debug.setText(instruction.toString());
-                System.out.println("The instruction: " + instruction.toString());
-                if (instruction.getManeuver() == Maneuver.LEFT){
-                    theArrow.setImageResource(R.drawable.leftnew);
-                }
-                else{
-                    theArrow.setImageResource(R.drawable.rightnew);
-                }
-            }
-
-            else
-                debug.setText("Reached destination!!!!!!!!!");
+            updateDirections();
 
             updateCamera();
             marker.setPosition(location);
         }
+    }
+
+    private void updateDirections() {
+        ImageView theArrow = (ImageView) findViewById(R.id.arrow);
+        TextView theDistance = (TextView) findViewById(R.id.distance);
+        if(currentInstruction == null) {
+            theArrow.setImageResource(R.drawable.done);
+            theDistance.setText("");
+            return;
+        }
+
+        if(currentInstruction.getDistance() > 55) {
+            theArrow.setImageResource(R.drawable.forward);
+        } else if(currentInstruction.getManeuver() == Maneuver.LEFT) {
+            theArrow.setImageResource(R.drawable.leftnew);
+        } else {
+            theArrow.setImageResource(R.drawable.rightnew);
+        }
+        theDistance.setText(((int)Math.round(currentInstruction.getDistance())) + "m");
     }
 
     @Override
