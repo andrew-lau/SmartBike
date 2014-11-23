@@ -160,10 +160,11 @@ public class DirectionsReader {
         currentStep = upcomingSteps.peek();
         Proximity proximity = getProximityTo(currentStep);
 
-        // 
+        // get distance to destination
+        double distance = distanceBetween(currentLocation, currentStep.getEnd());
 
         // create a new Instruction that will be displayed to the user
-        Instruction instruction = new Instruction(proximity, currentStep.getManeuver());
+        Instruction instruction = new Instruction(proximity, currentStep.getManeuver(), distance);
 
         // update previousLocation to equal currentLocation
         this.previousLocation = currentLocation;

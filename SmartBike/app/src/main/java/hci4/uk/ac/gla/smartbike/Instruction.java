@@ -9,13 +9,14 @@ public class Instruction {
     private Maneuver maneuver;
     private double distance;
 
-    public double getDistance() {
-        return distance;
-    }
-
-    public Instruction(Proximity proximity, Maneuver maneuver) {
+    public Instruction(Proximity proximity, Maneuver maneuver, double distance) {
         this.proximity = proximity;
         this.maneuver = maneuver;
+        this.distance = distance;
+    }
+
+    public double getDistance() {
+        return distance;
     }
 
     public Proximity getProximity() {
@@ -28,7 +29,7 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return proximity + " " + maneuver;
+        return proximity + " " + maneuver + " "  + distance;
     }
 
 }
