@@ -216,8 +216,8 @@ public class DirectionsReader {
     private boolean isCurrentStep(Step step) {
         Step nextStep = getNextStep();
 
-        // getting closer to current step
-        if(distanceBetween(currentLocation, step.getEnd()) < distanceBetween(previousLocation, step.getEnd())) {
+        // getting closer to current step or not moving at all
+        if(distanceBetween(currentLocation, step.getEnd()) <= distanceBetween(previousLocation, step.getEnd())) {
             return true;
         }
 
