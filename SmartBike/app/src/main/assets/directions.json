@@ -3,56 +3,198 @@
       {
          "bounds" : {
             "northeast" : {
-               "lat" : 55.8738609,
-               "lng" : -4.2921187
+               "lat" : 55.869623,
+               "lng" : -4.2847081
             },
             "southwest" : {
-               "lat" : 55.8738055,
-               "lng" : -4.2921936
+               "lat" : 55.86845779999999,
+               "lng" : -4.2853895
             }
          },
          "copyrights" : "Map data ©2014 Google",
          "legs" : [
             {
                "distance" : {
-                  "text" : "8 m",
-                  "value" : 8
+                  "text" : "0.1 km",
+                  "value" : 135
                },
                "duration" : {
                   "text" : "1 min",
-                  "value" : 3
+                  "value" : 26
                },
-               "end_address" : "University of Glasgow, 17 Lilybank Gardens, Glasgow, Glasgow, Glasgow City G12 8RZ, UK",
+               "end_address" : "Kelvin Way, Glasgow, Glasgow City G12 8QQ, UK",
                "end_location" : {
-                  "lat" : 55.8738055,
-                  "lng" : -4.2921187
+                  "lat" : 55.8688891,
+                  "lng" : -4.2849634
                },
-               "start_address" : "University of Glasgow, 17 Lilybank Gardens, Glasgow, Glasgow, Glasgow City G12 8RZ, UK",
+               "start_address" : "Kelvin Way, Glasgow, Glasgow City G12 8QQ, UK",
                "start_location" : {
-                  "lat" : 55.8738609,
-                  "lng" : -4.2921936
+                  "lat" : 55.8691261,
+                  "lng" : -4.285162199999999
                },
                "steps" : [
                   {
                      "distance" : {
-                        "text" : "8 m",
-                        "value" : 8
+                        "text" : "70 m",
+                        "value" : 70
                      },
                      "duration" : {
                         "text" : "1 min",
-                        "value" : 3
+                        "value" : 11
                      },
                      "end_location" : {
-                        "lat" : 55.8738055,
-                        "lng" : -4.2921187
+                        "lat" : 55.8685172,
+                        "lng" : -4.2853895
                      },
-                     "html_instructions" : "Head \u003cb\u003esoutheast\u003c/b\u003e toward \u003cb\u003eUniversity Gardens\u003c/b\u003e",
+                     "html_instructions" : "Head \u003cb\u003esouthwest\u003c/b\u003e",
                      "polyline" : {
-                        "points" : "sz_tIdieYBCDI"
+                        "points" : "a}~sIf}cYPLl@XTBb@@"
                      },
                      "start_location" : {
-                        "lat" : 55.8738609,
-                        "lng" : -4.2921936
+                        "lat" : 55.8691261,
+                        "lng" : -4.285162199999999
+                     },
+                     "travel_mode" : "BICYCLING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "14 m",
+                        "value" : 14
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 5
+                     },
+                     "end_location" : {
+                        "lat" : 55.86845779999999,
+                        "lng" : -4.285192299999999
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "gy~sIt~cYBKDM@M"
+                     },
+                     "start_location" : {
+                        "lat" : 55.8685172,
+                        "lng" : -4.2853895
+                     },
+                     "travel_mode" : "BICYCLING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "51 m",
+                        "value" : 51
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 10
+                     },
+                     "end_location" : {
+                        "lat" : 55.8688891,
+                        "lng" : -4.2849634
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "{x~sIl}cYCCEAEAEAE?E?WICCECOOAA"
+                     },
+                     "start_location" : {
+                        "lat" : 55.86845779999999,
+                        "lng" : -4.285192299999999
+                     },
+                     "travel_mode" : "BICYCLING"
+                  }
+               ],
+               "via_waypoint" : []
+            },
+            {
+               "distance" : {
+                  "text" : "0.1 km",
+                  "value" : 135
+               },
+               "duration" : {
+                  "text" : "1 min",
+                  "value" : 23
+               },
+               "end_address" : "Kelvin Way, Glasgow, Glasgow City G12 8QQ, UK",
+               "end_location" : {
+                  "lat" : 55.8692564,
+                  "lng" : -4.2850646
+               },
+               "start_address" : "Kelvin Way, Glasgow, Glasgow City G12 8QQ, UK",
+               "start_location" : {
+                  "lat" : 55.8688891,
+                  "lng" : -4.2849634
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "38 m",
+                        "value" : 38
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 7
+                     },
+                     "end_location" : {
+                        "lat" : 55.8691736,
+                        "lng" : -4.2847089
+                     },
+                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e",
+                     "polyline" : {
+                        "points" : "q{~sI~{cYAAg@KAACEG["
+                     },
+                     "start_location" : {
+                        "lat" : 55.8688891,
+                        "lng" : -4.2849634
+                     },
+                     "travel_mode" : "BICYCLING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "50 m",
+                        "value" : 50
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 7
+                     },
+                     "end_location" : {
+                        "lat" : 55.869623,
+                        "lng" : -4.2847081
+                     },
+                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-left",
+                     "polyline" : {
+                        "points" : "i}~sIlzcYyA?"
+                     },
+                     "start_location" : {
+                        "lat" : 55.8691736,
+                        "lng" : -4.2847089
+                     },
+                     "travel_mode" : "BICYCLING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "47 m",
+                        "value" : 47
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 9
+                     },
+                     "end_location" : {
+                        "lat" : 55.8692564,
+                        "lng" : -4.2850646
+                     },
+                     "html_instructions" : "Sharp \u003cb\u003eleft\u003c/b\u003e",
+                     "maneuver" : "turn-sharp-left",
+                     "polyline" : {
+                        "points" : "c`_tIlzcYp@t@TN"
+                     },
+                     "start_location" : {
+                        "lat" : 55.869623,
+                        "lng" : -4.2847081
                      },
                      "travel_mode" : "BICYCLING"
                   }
@@ -61,13 +203,13 @@
             }
          ],
          "overview_polyline" : {
-            "points" : "sz_tIdieYHM"
+            "points" : "a}~sIf}cY~@f@x@DHY@MCCKCKA]IIGQQi@MEGG[yA?p@t@TN"
          },
          "summary" : "",
          "warnings" : [
             "Bicycling directions are in beta. Use caution – This route may contain streets that aren't suited for bicycling."
          ],
-         "waypoint_order" : []
+         "waypoint_order" : [ 0 ]
       }
    ],
    "status" : "OK"

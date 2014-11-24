@@ -12,6 +12,7 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -32,6 +33,9 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -181,6 +185,15 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
 
             updateCamera();
             marker.setPosition(location);
+
+            // store location data
+            try {
+                FileWriter writer = new FileWriter(getLog(), true);
+                writer.append(System.currentTimeMillis() + "," + location + "\n");
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -263,10 +276,29 @@ public class MainActivity extends Activity implements GooglePlayServicesClient.C
     private void updateCamera() {
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(location)
-                .zoom(19)                   // Sets the zoom
+                .zoom(22)                   // Sets the zoom
                 .bearing(bearing)           // Sets the orientation of the camera to east
                 .tilt(70)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+    public File getLogDir() {
+        // Get the directory for the user's public pictures directory.
+        /*
+        File file = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DOCUMENTS), "smart_bike/smart_bike_user_data.log");
+        */
+        File rootsdcard = Environment.getExternalStorageDirectory();
+        File dir = new File(rootsdcard.getAbsolutePath(),"/smart_bike");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return dir;
+    }
+
+    public File getLog() {
+        File log = new File(getLogDir(), "smart_bike.log");
+        return log;
     }
 }
