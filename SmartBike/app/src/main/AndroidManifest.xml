@@ -42,13 +42,19 @@
             android:value="AIzaSyAQzmZ5fAROrGZNVCKOtXQD27RVsNSFics" />
 
         <activity
-            android:name="hci4.uk.ac.gla.smartbike.MainActivity"
+            android:name="hci4.uk.ac.gla.smartbike.HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="hci4.uk.ac.gla.smartbike.MainActivity"
+            android:label="@string/app_name"
+            android:parentActivityName="hci4.uk.ac.gla.smartbike.HomeActivity" >
         </activity>
     </application>
 </manifest>
